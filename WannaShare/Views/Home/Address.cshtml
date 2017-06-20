@@ -1,0 +1,32 @@
+﻿
+@{
+   // Layout = null;
+    ViewBag.Title = "Address";
+}
+
+
+<div ng-controller="addressController"
+     class="row address-main"  map-lazy-load="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyAXMD_tc_2ilRdXhQrQQWP5LIvWj0as7wk" map-lazy-load-params="{{googleMapsUrl}}">
+    <input id="pac-input" class="controls search-box" type="text" placeholder="Enter Address" places-auto-complete types="['geocode']" on-place-changed="placeMarker()">
+    @*<ng-map center="32.5938,-96.5051" zoom="10"></ng-map>*@
+
+    <ng-map id="mapa" center="{{center}}" zoom="10" on-click="getpos($event)" style='width: 100%; margin: 15px;'>
+        <marker position="{{latlng}}" on-dragend="getpos($event)"
+                animation="Animation.BOUNCE" animation="DROP" draggable="true"></marker>
+    </ng-map>
+</div>
+
+    
+@*<div class="row address-main" ng-controller="addressController">
+    <input id="pac-input" class="controls search-box" type="text" placeholder="Enter Address">
+    <div id="map_canvas" class="search-map">
+    </div> 
+
+    <span>{{selectedAddress}}</span>
+</div>*@
+    
+
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmtuY0OJAGSyLV0wY2G7F161QWVxZs6Cw&libraries=places&callback=initializeMap"
+        async defer></script>*@
+
+ 
