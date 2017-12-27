@@ -6,17 +6,24 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WannaShare;
 using WannaShare.Controllers;
+using ShareFoodService.Services;
 
 namespace WannaShare.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
+        public IShareFoodService _service;
+
+        public HomeControllerTest(IShareFoodService service)
+        {
+            _service = service;
+        }
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(_service);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +36,7 @@ namespace WannaShare.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(_service);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +49,7 @@ namespace WannaShare.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            HomeController controller = new HomeController(_service);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;
