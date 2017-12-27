@@ -17,19 +17,22 @@ namespace ShareFoodService.Services
             _context = context;
         }
 
-        public async Task<int> SaveFoodItems()
+        public async Task<int> SaveFoodItems(IEnumerable<FoodItem> items)
         {
-            var food = new FoodItem()
+            foreach(var item in items)
             {
-                Name = "test1", Description = "test description"
-            };
-            _context?.FoodItems.Add(food);
+                SaveFoodItem(item);
+            }
             return await _context.SaveChangesAsync();
+        }
+        private void SaveFoodItem(FoodItem item)
+        {
+            _context?.FoodItems.Add(item);
         }
 
         public async Task<IEnumerable<FoodItem>> GetFoodItems()
         {
-            return await _context?.FoodItems.ToListAsync();
+            return await _context?.FoodItems.Include(x=>x.Address).Include(x => x.PhoneNumbers).ToListAsync();
         }
 
         public async Task<FoodItem> GetFoodItem()

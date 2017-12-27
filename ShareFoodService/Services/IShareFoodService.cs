@@ -6,7 +6,7 @@ namespace ShareFoodService.Services
 {
     public interface IShareFoodService
     {
-        Task<int> SaveFoodItems();
+        Task<int> SaveFoodItems(IEnumerable<FoodItem> items);
         Task<IEnumerable<FoodItem>> GetFoodItems();
         Task<FoodItem> GetFoodItem();
     }

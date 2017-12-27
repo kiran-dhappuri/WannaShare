@@ -1,4 +1,5 @@
-﻿using ShareFoodService.Services;
+﻿using ShareFoodService.Models;
+using ShareFoodService.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,18 @@ namespace WannaShare.Controllers
             ViewBag.Message = "Select address.";
             return View();
         }
+        public async Task<ActionResult> AddFoodItem()
+        {
+            var item = new FoodItem() { };
+            return View(item);
+        }
+        [HttpPost]
+        public async Task<ActionResult> AddFoodItem(FoodItem item)
+        {
+            await _service.SaveFoodItems(new List<FoodItem>() { item });
 
+            return View(item);
+        }
         public async Task<ActionResult> List()
         {
             var res = await _service?.GetFoodItems();
@@ -53,7 +65,24 @@ namespace WannaShare.Controllers
         /// <returns></returns>
         public async Task<ActionResult> AddFood()
         {
-            await _service.SaveFoodItems();
+            var food = new FoodItem()
+            {
+                Name = "Test",
+                Description = "Test Desc",
+                PhoneNumbers = new PhoneNumber()
+                    {
+                         PhoneNum = "424-239-4327"
+                    },
+                Address = new Address()
+                {
+                    Line1 = "test1",
+                    Line2 = "test2",
+                    City = "city",
+                    State = "state",
+                    Counrty = "country"
+                }
+            };
+            await _service.SaveFoodItems(new List<FoodItem>() { food });
             return RedirectToAction("Index");
         }
     }

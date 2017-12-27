@@ -16,5 +16,7 @@ namespace ShareFoodService.Context
         }
 
         public DbSet<FoodItem> FoodItems { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<PhoneNumber> PhoneNumbers { get; set; }
     }
 }

@@ -85,6 +85,8 @@
     <Compile Include="Context\ISharedFoodContext.cs" />
     <Compile Include="Context\ShareFoodContext.cs" />
     <Compile Include="Core\ServiceCore.cs" />
+    <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\PhoneNumber.cs" />
     <Compile Include="Services\IShareFoodService.cs" />
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Services\ShareFoodService.cs" />
