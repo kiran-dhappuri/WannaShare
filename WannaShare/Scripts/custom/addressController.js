@@ -20,12 +20,80 @@
             $scope.latlng = [event.latLng.lat(), event.latLng.lng()];
         };
 
+        function getCity(components) {
+            var city = 'n/a';
+            if (components) {
+                for (var c = 0; c < components.length; ++c) {
+                    console.log(components[c].types.join('|'))
+                    if (components[c].types.indexOf('locality') > -1
+                        &&
+                        components[c].types.indexOf('political') > -1
+                    ) {
+                        city = components[c].long_name;
+                        break;
+                    }
+                }
+            }
+            return city;
+        }
+
+        function getState(components) {
+            var state = 'n/a';
+            if (components) {
+                for (var c = 0; c < components.length; ++c) {
+                    console.log(components[c].types.join('|'))
+                    if (components[c].types.indexOf('administrative_area_level_1') > -1
+                        &&
+                        components[c].types.indexOf('political') > -1
+                    ) {
+                        state = components[c].long_name;
+                        break;
+                    }
+                }
+            }
+            return state;
+        }
+        function getCountry(components) {
+            var country = 'n/a';
+            if (components) {
+                for (var c = 0; c < components.length; ++c) {
+                    console.log(components[c].types.join('|'))
+                    if (components[c].types.indexOf('country') > -1
+                        &&
+                        components[c].types.indexOf('political') > -1
+                    ) {
+                        country = components[c].long_name;
+                        break;
+                    }
+                }
+            }
+            return country;
+        }
+
+        function getZipCode(components) {
+            var zipCode = 'n/a';
+            if (components) {
+                for (var c = 0; c < components.length; ++c) {
+                    console.log(components[c].types.join('|'))
+                    if (components[c].types.indexOf('postal_code') > -1
+                    ) {
+                        zipCode = components[c].long_name;
+                        break;
+                    }
+                }
+            }
+            return zipCode;
+        }
 
         $scope.placeMarker = function () {
             console.log(this.getPlace());
             var loc = this.getPlace().geometry.location;
             $scope.latlng = [loc.lat(), loc.lng()];
             $scope.center = [loc.lat(), loc.lng()];
+            $scope.city = getCity(this.getPlace().address_components);
+            $scope.state = getState(this.getPlace().address_components);
+            $scope.country = getCountry(this.getPlace().address_components);
+            $scope.zipCode = getZipCode(this.getPlace().address_components);
         };
 
         $scope.googleMapsUrl = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAXMD_tc_2ilRdXhQrQQWP5LIvWj0as7wk&libraries=places";

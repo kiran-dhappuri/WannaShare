@@ -11,7 +11,7 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal" ng-controller="addressController">
         <h4>FoodItem</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -38,7 +38,36 @@
             </div>
         </div>
 
-        <div ng-controller="addressController"
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="Address.City" class="form-control text-box single-line" type="text" placeholder="City" value="{{city}}" readonly/>
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="Address.State" class="form-control text-box single-line" type="text" placeholder="City" value="{{state}}" readonly />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address.Counrty, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="Address.Counrty" class="form-control text-box single-line" type="text" placeholder="City" value="{{country}}" readonly />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Address.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="Address.ZipCode" class="form-control text-box single-line" type="text" placeholder="City" value="{{city}}" readonly />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div 
              class="row address-main" map-lazy-load="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyAXMD_tc_2ilRdXhQrQQWP5LIvWj0as7wk" map-lazy-load-params="{{googleMapsUrl}}">
             @Html.LabelFor(model => model.Address.Line1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

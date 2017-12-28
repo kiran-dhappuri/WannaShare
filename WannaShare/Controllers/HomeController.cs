@@ -1,6 +1,6 @@
-﻿using ShareFoodService.Models;
+﻿using MessageHelper.SMS;
+using ShareFoodService.Models;
 using ShareFoodService.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,9 +12,11 @@ namespace WannaShare.Controllers
     public class HomeController : Controller
     {
         public IShareFoodService _service;
-        public HomeController(IShareFoodService service)
+        private ISMSService _smsService;
+        public HomeController(IShareFoodService service, ISMSService smsService)
         {
             _service = service;
+            _smsService = smsService;
         }
         public ActionResult Index()
         {
@@ -85,5 +87,10 @@ namespace WannaShare.Controllers
             await _service.SaveFoodItems(new List<FoodItem>() { food });
             return RedirectToAction("Index");
         }
+
+        public async Task SendTestSMS(string phone)
+        {
+            await _smsService.SendSMS(phone, "message from Kiran Dhappuri... howdy?? :D", "hi");
+        } 
     }
 }

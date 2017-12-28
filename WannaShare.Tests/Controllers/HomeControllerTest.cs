@@ -7,23 +7,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WannaShare;
 using WannaShare.Controllers;
 using ShareFoodService.Services;
+using MessageHelper.SMS;
 
 namespace WannaShare.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest
     {
-        public IShareFoodService _service;
+        private IShareFoodService _service;
+        private ISMSService _smsService;
 
-        public HomeControllerTest(IShareFoodService service)
+        public HomeControllerTest(IShareFoodService service, ISMSService smsService)
         {
             _service = service;
+            _smsService = smsService;
         }
         [TestMethod]
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController(_service);
+            HomeController controller = new HomeController(_service, _smsService);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -36,7 +39,7 @@ namespace WannaShare.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController(_service);
+            HomeController controller = new HomeController(_service, _smsService);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -49,7 +52,7 @@ namespace WannaShare.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController(_service);
+            HomeController controller = new HomeController(_service, _smsService);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

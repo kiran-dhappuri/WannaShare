@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using MessageHelper.SMS;
+using Ninject;
 using ShareFoodService.Context;
 using ShareFoodService.Services;
 using System;
@@ -15,6 +16,7 @@ namespace ShareFoodService.Core
         {
             kernel.Bind<ISharedFoodContext>().To<ShareFoodContext>();
             kernel.Bind<IShareFoodService>().To<FoodService>();
+            kernel.Bind<ISMSService>().To<SMSService>();
         }
     }
 }
